@@ -1,4 +1,4 @@
-Challenge 
+### Challenge 
 Discovery Debugging. Using *p* and *binding.irb* to get visibility.
 
 Debug the following program
