@@ -18,7 +18,8 @@ class DiaryEntry
     @contents.split(" ").length
   end
 
-  def reading_time(wpm) 
+  def reading_time(wpm)
+    fail "ERROR" unless wpm.positive?
     (count_words.to_f / wpm).ceil
     # returns the time to read the contents 
 

@@ -1,0 +1,19 @@
+Integration tests
+  Create a Diary Entry and add to Diary -
+  Count the number of words in all diary entries combined -
+
+Unit tests
+Diary
+  See a list of all entries -
+  Returns estimate of reading time for all diary entries, based on given WPM
+  Given wpm and minutes (reading time) find the entry which is closest to the reading time
+
+DairyEntry
+  Return title
+  Return contents
+  Return number of words in contents
+  Given wpm, return estimated reading time in mins (integer) 
+  reading_chunk(wpm, minutes) (both ints)
+    returns string with chunk of text user could read in given number of mins
+    if called again, returns next chunk. After that restarts.
+
