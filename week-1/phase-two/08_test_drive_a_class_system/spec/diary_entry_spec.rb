@@ -12,7 +12,6 @@ describe DiaryEntry do
       diary_entry = DiaryEntry.new("Monday", "It was a dark day.")
       expect(diary_entry.count_words).to eq 5
     end
- 
 
     it "Returns 0 if contents is empty" do
       diary_entry = DiaryEntry.new("Monday", "")
