@@ -1,9 +1,11 @@
 class Diary
   def initialize
     @entries = []
+    @todolist = []
+    @contacts = []
   end
 
-  def add(entry) # entry is an instance of DiaryEntry
+  def add(entry)
     @entries << entry
   end
 
@@ -12,26 +14,38 @@ class Diary
   end
 
   def count_words
-    # needed for below calculation
-    # Returns number of words in all diary entries
     return @entries.sum(&:count_words)
   end
 
-  def readable_entries_in_time(wpm, time) # both integers, time in minutes, wpm - words per minute
-    # Returns diary entry with read time closest to time given
-    # Need to have: 
-      # Reading time of each entry
-        # Which needs WPM and word count
-      # Sort to remove those over the time
-      # Sort by time to read
-      # return entry with highest time to read (integer)
+  def readable_entries_in_time(wpm, time) 
+    fail "WPM must be above 0" if wpm <= 0
+
+    filtered = @entries.filter do |entry|
+      entry.reading_time(wpm) <= time    
+    end
+
+    return filtered.max_by { |entry| entry.count_words } 
   end
 
-  def todolist
-    # Return TodoList
+  def todolist_add(task)
+    @todolist << task
+  end
+
+  def todolist_incomplete
+    return @todolist
+  end
+
+  def todolist_complete
+    @todolist.filter do |todo|
+      todo.check_done
+    end
   end
 
   def return_contacts 
-    # Returns mobile phone numbers filtered from all entries
+    @entries.each do |entry|
+      contact = entry.return_contacts
+      @contacts << contact unless contact == []
+    end
+    return @contacts
   end 
 end

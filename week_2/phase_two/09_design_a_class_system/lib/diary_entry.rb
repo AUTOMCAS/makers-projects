@@ -1,7 +1,8 @@
 class DiaryEntry
-  def initialize(title, content) # title and content are both strings
+  def initialize(title, content)
     @title = title
     @content = content
+    @contacts = []
   end
 
   def title
@@ -12,13 +13,18 @@ class DiaryEntry
     return @content
   end
 
-  def count_words # returns integer
+  def count_words
     return content.split(" ").length
   end
 
-  def reading_time(wpm) #wpm is integer
-    # time to read the contents in mins
-    # number of words / wpm
-    return count_words / wpm
+  def reading_time(wpm)
+    return (count_words / wpm.to_f).ceil
+  end
+
+  def return_contacts
+    @content.split(" ").each do |word|
+      @contacts << word if word.match /^\d{1,11}$/
+    end
+    return @contacts
   end
 end

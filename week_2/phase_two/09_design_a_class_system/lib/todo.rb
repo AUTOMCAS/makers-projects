@@ -1,19 +1,24 @@
 class Todo
-  def initialize(task) # task is a string
-    # Create task
+  def initialize(task)
+    @task = task
+    @done = false
   end
 
   def return_task
-    # Return task
+    return @task
   end
 
   def check_done
-    # check if task is done
-    # Return true if done or false if not
+    @done
   end
 
   def mark_done
-    # Mark a task as done
-    # Return nothing
+    @done = true
+  end
+
+  def check_for_contacts
+  end
+
+  def return_contacts
   end
 end
