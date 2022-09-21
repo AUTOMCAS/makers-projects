@@ -16,9 +16,4 @@ class Todo
     @done = true
   end
 
-  def check_for_contacts
-  end
-
-  def return_contacts
-  end
 end

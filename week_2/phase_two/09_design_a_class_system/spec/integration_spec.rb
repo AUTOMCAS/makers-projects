@@ -88,7 +88,7 @@ describe "integration" do
           diary = Diary.new
           entry_1 = DiaryEntry.new("Friday", "A bright day 07911123456")
           diary.add(entry_1)
-          expect(diary.return_contacts).to eq [["07911123456"]]
+          expect(diary.return_contacts).to eq ["07911123456"]
         end
       end
       context "given two entries, one containing a number" do 
@@ -98,7 +98,7 @@ describe "integration" do
           entry_2 = DiaryEntry.new("Friday", "A bright day 07911123456")
           diary.add(entry_1)
           diary.add(entry_2)
-          expect(diary.return_contacts).to eq [["07911123456"]]
+          expect(diary.return_contacts).to eq ["07911123456"]
         end
       end
 
@@ -111,7 +111,7 @@ describe "integration" do
           diary.add(entry_1)
           diary.add(entry_2)
           diary.add(entry_3)
-          expect(diary.return_contacts).to eq [["07911123456"], ["07911128888"]]
+          expect(diary.return_contacts).to eq ["07911123456", "07911128888"]
         end
       end
     end

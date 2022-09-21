@@ -43,8 +43,8 @@ class Diary
 
   def return_contacts 
     @entries.each do |entry|
-      contact = entry.return_contacts
-      @contacts << contact unless contact == []
+      contact = entry.return_contacts.pop
+      @contacts << contact unless contact == nil
     end
     return @contacts
   end 
