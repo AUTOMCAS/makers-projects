@@ -13,7 +13,6 @@ RSpec.describe TaskList do
 
   describe "all" do
     it "returns task list" do
-      task_list
       task_1 = double :task
       task_2 = double :task
       task_list.add(task_1)
@@ -24,7 +23,6 @@ RSpec.describe TaskList do
 
   describe "all_complete?" do
     it "marks tasks as complete" do
-      task_list
       task_list.add(double(:task_1, complete?: true))
       task_list.add(double(:task_2, complete?: true))
       expect(task_list.all_complete?).to eq true

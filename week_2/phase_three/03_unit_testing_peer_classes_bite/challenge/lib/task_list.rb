@@ -4,10 +4,10 @@ class TaskList
   end
 
   def add(task)
-    @tasks << task
+    @tasks << task #formatted
   end
 
-  def all
+  def all 
     return @tasks
   end
 
