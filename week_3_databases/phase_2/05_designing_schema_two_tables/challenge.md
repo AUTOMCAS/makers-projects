@@ -82,18 +82,12 @@ Posts can have many comments. Foreign key is on comments.
 ## 4. Write the SQL.
 
 ```sql
--- EXAMPLE
--- file: albums_table.sql
 
--- Replace the table name, columm names and types.
-
--- Create the table without the foreign key first.
 CREATE TABLE comments (
   id SERIAL PRIMARY KEY,
   name text,
   content text
 );
-
 
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
