@@ -25,7 +25,7 @@ describe AlbumRepository do
   it "returns album by id" do
     repo = AlbumRepository.new
     album = repo.find(2)
-    
+
     expect(album.title).to eq 'Meteora'
     expect(album.release_year).to eq '2003'
     expect(album.artist_id).to eq '1'
