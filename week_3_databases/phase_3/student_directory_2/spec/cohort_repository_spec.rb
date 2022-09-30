@@ -10,13 +10,20 @@ describe CohortRepository do
   before(:each) do 
     reset_name_table
   end
+  it "returns all cohorts" do
+    repo = CohortRepository.new
 
-  # (your tests will go here).  
+    cohorts = repo.all
+
+    expect(cohorts.length).to eq 2
+    expect(cohorts[0].id).to eq "1"
+    expect(cohorts[0].name).to eq 'April 2022'
+  end
+
   it 'finds the cohort we want' do
     repo = CohortRepository.new
     cohort = repo.finds_with_students(1)
 
-    expect(cohort.name).to eq 'April 2022' # =>  'April 2022'
-    expect(cohort.students.length).to eq '1' # =>  1
+    expect(cohort.students.length).to eq 1 
   end
 end

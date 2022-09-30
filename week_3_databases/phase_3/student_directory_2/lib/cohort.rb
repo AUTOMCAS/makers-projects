@@ -5,6 +5,6 @@ class Cohort
   #:students added because joins
 
   def initialize
-    @students = []
+     @students = []
   end
 end
