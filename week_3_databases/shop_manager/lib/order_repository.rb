@@ -22,7 +22,7 @@ class OrderRepository
 
   def create_with_items(new_order)
     sql = 'INSERT INTO orders
-            (customer_name, order_date, item_id)
+    (customer_name, order_date, item_id)
             VALUES ($1, $2, (SELECT id from items WHERE id = $3));'
 
     params = [new_order.customer_name, new_order.order_date, new_order.item_id]
