@@ -15,7 +15,6 @@ describe Application do
   end
 
   include Rack::Test::Methods
-
   let(:app) { Application.new }
 
   context 'GET /albums' do
@@ -31,25 +30,59 @@ describe Application do
     end
   end
 
-  context 'GET /albums/:id' do
-    it 'gets information for album with id 1' do
-      response = get('/albums/1')
+  describe 'new album form' do
+    context 'GET /albums/new' do
+      it 'returns form page' do
+        response = get('/albums/new')
 
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>Doolittle</h1>')
-      expect(response.body).to include('Release year: 1989')
-      expect(response.body).to include('Artist: Pixies')
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Add an album</h1>')
+        expect(response.body).to include('<form action="/albums" method="POST">')
+      end
     end
 
-    it "gets information about the album with id 2" do
-      response = get('/albums/2')
+    context 'POST /albums' do
+      it 'returns a success page' do
+        response = post('/albums', title: "Voyage" , release_year: "2022", artist_id: "2")
 
-      expect(response.body).to include('<h1>Surfer Rosa</h1>')
-      expect(response.body).to include('Release year: 1988')
-      expect(response.body).to include('Artist: Pixies')      
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Album added</h1>')
+      end
+
+      it 'responds with 400 status if parameters are invalid' do
+        response = post('/albums', title: "title" , release_yea: "2", artist_id: "2")
+        expect(response.status).to eq(400)
+      end
     end
   end
 
+  describe 'new artist form' do
+    context 'GET /artists/new' do
+      it 'returns form page' do
+        response = get('/artists/new')
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Add an artist</h1>')
+        expect(response.body).to include('<form action="/artists" method="POST">')
+      end
+    end
+
+    context 'POST /artists' do
+      it 'returns success page' do
+        response = post('/artists', name: "Art", genre: "rock")
+
+        expect(response.status).to eq(200)
+        expect(response.body).to include('<h1>Artist added</h1>')
+      end
+    end
+
+    it 'responds with 400 status if parameters are invalid' do
+      response = post('/artists', name: "title" , genr: "2")
+
+      expect(response.status).to eq(400)
+    end
+  end
+  
   context 'POST /albums' do
     it "creates an album" do
       response = post('/albums', title: "Voyage" , release_year: "2022", artist_id: "2")
@@ -74,25 +107,7 @@ describe Application do
       expect(response.body).to include('Name: ABBA')
       expect(response.body).to include("<a href='/artists/2'>Link to artist's page</a>")
     end
-  end
-
-  context 'GET /artists/:id' do
-    it 'gets information for artist with id 1' do
-      response = get('/artists/1')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>Pixies</h1>')
-      expect(response.body).to include('Genre: Rock')
-    end
-
-    it 'gets information for artist with id 1' do
-      response = get('/artists/2')
-
-      expect(response.status).to eq(200)
-      expect(response.body).to include('<h1>ABBA</h1>')
-      expect(response.body).to include('Genre: Pop')
-    end
-  end
+  end  
 
   context 'POST /artists' do
     it 'creates a new artist with given parameters' do
@@ -106,6 +121,41 @@ describe Application do
     end
   end
 
+
+  
+  context 'GET /albums/:id' do
+    it 'gets information for album with id 1' do
+      response = get('/albums/1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Doolittle</h1>')
+      expect(response.body).to include('Release year: 1989')
+      expect(response.body).to include('Artist: Pixies')
+    end
+
+    it "gets information about the album with id 2" do
+      response = get('/albums/2')
+
+      expect(response.body).to include('<h1>Surfer Rosa</h1>')
+      expect(response.body).to include('Release year: 1988')
+      expect(response.body).to include('Artist: Pixies')      
+    end
+  end
+
+  context 'GET /artists/:id' do
+    it 'gets information for artist with id 1' do
+      response = get('/artists/1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>Pixies</h1>')
+      expect(response.body).to include('Genre: Rock')
+    end
+    it 'gets information for artist with id 1' do
+      response = get('/artists/2')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1>ABBA</h1>')
+      expect(response.body).to include('Genre: Pop')
+    end
+  end
 end
-
-

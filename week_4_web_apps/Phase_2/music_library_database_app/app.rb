@@ -21,32 +21,31 @@ class Application < Sinatra::Base
     return erb(:albums)
   end
 
-  get "/albums/:id" do
-    repo = AlbumRepository.new
-    artist_repo = ArtistRepository.new
-    repo.all
-    artist_repo.all
-    @album = repo.find(params[:id])
-
-    @artist = artist_repo.find(@album.artist_id)
-    
-    return erb(:index)
-  end
 
   post '/albums' do
-    title = params[:title]
-    release_year = params[:release_year]
-    artist_id = params[:artist_id]
-
+    if album_invalid_request_parameters?
+      status 400
+      return ''
+    end
+    
     repo = AlbumRepository.new
     new_album = Album.new
-    new_album.title = title
-    new_album.release_year = release_year
-    new_album.artist_id = artist_id
+    new_album.title = params[:title]
+    new_album.release_year = params[:release_year]
+    new_album.artist_id = params[:artist_id]
 
     repo.create(new_album)
 
-    return nil
+    return erb(:album_created)
+
+  end
+
+  def album_invalid_request_parameters?
+    params[:title] == nil || params[:release_year] == nil || params[:artist_id] == nil
+  end
+  
+  get '/albums/new' do
+    return erb(:new_album_form)
   end
 
   get '/artists' do
@@ -56,27 +55,25 @@ class Application < Sinatra::Base
     return erb(:artists2)
   end
 
-  get "/artists/:id" do
-    repo = ArtistRepository.new
-    repo.all
-
-    @artist = repo.find(params[:id])
-    return erb(:artists)
-  end
-
   post '/artists' do
-    name = params[:name]
-    genre = params[:genre]
+    if params[:name] == nil || params[:genre] == nil
+      status 400
+      return ''
+    end
 
     repo = ArtistRepository.new
 
     new_artist = Artist.new
-    new_artist.name = name
-    new_artist.genre = genre
+    new_artist.name = params[:name]
+    new_artist.genre = params[:genre]
 
     repo.create(new_artist)
 
-    return nil
+    return erb(:artist_created)
+  end
+
+  get '/artists/new' do
+    return erb(:new_artist_form)
   end
 
   get '/albums/:id' do
@@ -91,5 +88,12 @@ class Application < Sinatra::Base
     return erb(:index)
   end
 
+  get "/artists/:id" do
+    repo = ArtistRepository.new
+    repo.all
+
+    @artist = repo.find(params[:id])
+    return erb(:artists)
+  end
 
 end
