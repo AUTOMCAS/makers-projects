@@ -6,20 +6,20 @@ class GithubApi {
   fetchRepositoryData(repo, repositoryData) {
     const url = 'https://api.github.com/repos/' + repo;
     got(url).then((response) => {
-      const repositoryData = JSON.parse(response.body);
-      console.log(repositoryData);
-      
+      repositoryData(JSON.parse(response.body));
     });
   };
 }
 
+module.exports = GithubApi;
+
 // const githubApi = new GithubApi;
 
-githubApi.fetchRepositoryData('sinatra/sinatra', (repositoryData) => {
-    repositoryData;
-  });
+// githubApi.fetchRepositoryData('sinatra/sinatra', (repositoryData) => {
+//     repositoryData;
+//   });
 
-// module.exports = GithubApi;
+
 
 // const GithubApi = require('./githubApi');
 // const api = new GithubApi();

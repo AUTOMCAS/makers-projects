@@ -1,4 +1,4 @@
-// const api = require('./githubApi')
+const GithubApi = require('./githubApi');
 
 class Github {
   constructor(api) {
@@ -9,7 +9,6 @@ class Github {
   fetch(repo) {
     this.api.fetchRepositoryData(repo, (repositoryData) => {
       this.apiObject = repositoryData});
-    debugger;
   }
 
   getRepoData() {
@@ -21,17 +20,17 @@ class Github {
 module.exports = Github;
 
 
-const mockedApi = {
-   fetchRepositoryData: (repoName, callback) => {
-    callback({
-      name: 'sinatra/sinatra',
-      description: 'Some fake description'
-    });
-  }
-}
+//const mockedApi = {
+//    fetchRepositoryData: (repoName, callback) => {
+//     callback({
+//       name: 'sinatra/sinatra',
+//       description: 'Some fake description'
+//     });
+//   }
+// }
 
-// const github = new Github(mockedApi)
-
-// github.fetch('sinatra/sinatra');
-
-// github.getRepoData()
+const api = new GithubApi();
+const github = new Github(api)
+github.fetch('sinatra/sinatra');
+github.getRepoData()
+debugger;
