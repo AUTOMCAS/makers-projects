@@ -12,17 +12,3 @@ class GithubApi {
 }
 
 module.exports = GithubApi;
-
-// const githubApi = new GithubApi;
-
-// githubApi.fetchRepositoryData('sinatra/sinatra', (repositoryData) => {
-//     repositoryData;
-//   });
-
-
-
-// const GithubApi = require('./githubApi');
-// const api = new GithubApi();
-// api.fetchRepositoryData('sinatra/sinatra', (repositoryData) => {
-//   console.log(repositoryData);
-// });

@@ -19,18 +19,7 @@ class Github {
 
 module.exports = Github;
 
-
-//const mockedApi = {
-//    fetchRepositoryData: (repoName, callback) => {
-//     callback({
-//       name: 'sinatra/sinatra',
-//       description: 'Some fake description'
-//     });
-//   }
-// }
-
-const api = new GithubApi();
-const github = new Github(api)
-github.fetch('sinatra/sinatra');
-github.getRepoData()
-debugger;
+// const api = new GithubApi();
+// const github = new Github(api)
+// github.fetch('sinatra/sinatra');
+// github.getRepoData()
