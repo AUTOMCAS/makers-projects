@@ -12,13 +12,21 @@
           this.buttonEl.addEventListener("click", () => {
             this.displayMessage();
           });
+          this.hideButtonEl = document.querySelector("#hide-message-button");
+          this.hideButtonEl.addEventListener("click", () => {
+            this.hideMessage();
+          });
+          this.inputEl = document.querySelector("#message-input");
         }
         displayMessage() {
           const newDivEl = document.createElement("div");
           newDivEl.setAttribute("id", "message");
-          newDivEl.textContent = "This message displayed by JavaScript";
+          newDivEl.textContent = this.inputEl.value;
           document.body.append(newDivEl);
-          console.log("Thanks for clicking me!");
+        }
+        hideMessage() {
+          const removeDivEl = document.querySelector("#message");
+          removeDivEl.remove();
         }
       };
       module.exports = MessageView2;
